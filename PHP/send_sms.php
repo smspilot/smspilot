@@ -15,7 +15,7 @@ echo '<html><head><title>SMSPILOT.RU SMS</title></head><h1>Отправить SM
 if ( isset($_POST['phone'], $_POST['text']) ) {
 	$error = false;
 	// введен телефон?
-	if ( $_POST['phone'] === '' ){
+	if ( $_POST['phone'] === '' ) {
 		$error .= 'Введите телефон!<br/>';
 	}
 	if ( $_POST['text'] === '' ) {
