@@ -1,4 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
+# Отправка SMS на чистом Python через sms-шлюз SMSPILOT.RU
 import urllib
 import json
 import time
@@ -14,7 +15,7 @@ url = "http://smspilot.ru/api.php?send=%s&to=%s&from=%s&apikey=%s&format=json" %
 j = json.loads(urllib.urlopen(url).read())
 
 if 'error' in j:
-	print 'Ошибка: %s' % ( j.description_ru )
+	print 'Ошибка: %s' % j.description_ru
 else:
 	print j
 	# {u'balance': u'11908.50', u'cost': u'1.68', u'send': [{u'status': u'0', u'phone': u'79037672215', u'server_id': u'10000', u'price': u'1.68'}]}
