@@ -1,5 +1,6 @@
-﻿var http                = require('http');
-var querystring         = require("querystring");
+﻿// отправка SMS на чистой Node
+var http                = require('http');
+var querystring         = require('querystring');
 
 var phone = '79037672215'; // номер телефона
 var text = 'проверка'; // текст
