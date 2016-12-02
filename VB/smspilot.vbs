@@ -1,10 +1,12 @@
 ' SMS через SMSPILOT.RU
 Phone = "79087964781"
+
 ' Для поддержки кириллицы нужен очень длинный скрипт, поэтому используем транслит
 Text = "Otpravka SMS cherez SMSPILOT WSH VBS"
-APIKEY = "ЗДЕСЬ НУЖНО ПОДСТАВИТЬ СВОЙ API-ключ https://www.smspilot.ru/settings.php#api"
 
-SMS = False
+' (!!!) Замените на свой API-ключ https://www.smspilot.ru/settings.php#api
+APIKEY = "XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ"
+
 
 Set HttpReq = CreateObject("WinHttp.WinHttpRequest.5.1")
 
@@ -15,7 +17,6 @@ URL = URL & "&to=" & Phone
 ' Своя подпись
 ' URL = URL & "&from=smspilot"
 
-' (!) Замените на свой API-ключ
 URL = URL & "&apikey=" & APIKEY
 
 If HttpReq.Open("GET", URL, False) <> 0 Then
