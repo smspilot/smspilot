@@ -2,7 +2,6 @@
 # Отправка SMS на чистом Python через sms-шлюз SMSPILOT.RU
 import urllib
 import json
-import time
 
 phone = '79037672215' # номер телефона в международном формате
 text = 'проверка'; # текст сообщения
