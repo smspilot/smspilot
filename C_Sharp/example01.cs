@@ -12,9 +12,9 @@ namespace smspilot
 		{
 			string send = "Привет мир!"; // текст SMS
 			string to = "79876543210"; // номер телефона в международном формате
-			//  имя отправителя из списка https://www.smspilot.ru/my-sender.php
+			//  имя отправителя из списка https://smspilot.ru/my-sender.php
 			string _from = "";
-			// !!! Замените API-ключ на свой https://www.smspilot.ru/my-settings.php#api
+			// !!! Замените API-ключ на свой https://smspilot.ru/my-settings.php#api
 			string apikey = "XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ";
 			string url = "http://smspilot.ru/api.php" +
 				"?send="+Uri.EscapeUriString( send ) +

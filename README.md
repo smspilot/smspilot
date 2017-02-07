@@ -10,5 +10,5 @@
 `http://smspilot.ru/api.php?send=test&to=79037672215&apikey=XYZ`
 
 test - текст сообщения<br/>
-to - номер телефона<br/>
-apikey - берём из настроек в личном кабинете https://www.smspilot.ru/my-settings.php#api
+79037672215 - номер телефона<br/>
+XYZ - нужно заменить на API-ключ из настроек в личном кабинете https://smspilot.ru/my-settings.php#api

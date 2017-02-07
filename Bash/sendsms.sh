@@ -7,7 +7,7 @@ text=$1
 phone=$2
 
 # (!!!) Замените XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ
-# на свой API-ключ: https://www.smspilot.ru/my-settings.php#api
+# на свой API-ключ: https://smspilot.ru/my-settings.php#api
 
 apikey=XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ
 

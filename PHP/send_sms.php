@@ -1,5 +1,5 @@
 <?php
-// Скрипт простой формы для отправки SMS через шлюз http://www.smspilot.ru/
+// Скрипт простой формы для отправки SMS через шлюз https://smspilot.ru/
 
 // включаем отображение всех ошибок
 ini_set('error_reporting', E_ALL );
@@ -9,7 +9,7 @@ ini_set('display_errors', true );
 require_once __DIR__ . '/smspilot.config.php';
 
 // выводим шапку страницы с формой
-echo '<html><head><title>SMSPILOT.RU SMS</title></head><h1>Отправить SMS через шлюз <a href="http://www.smspilot.ru/">SMSPILOT.RU</a></h1>';
+echo '<html><head><title>SMSPILOT.RU SMS</title></head><h1>Отправить SMS через шлюз <a href="https://smspilot.ru/">SMSPILOT.RU</a></h1>';
 
 // если нажата кнопка "Отправить SMS"
 if ( isset($_POST['phone'], $_POST['text']) ) {
@@ -24,7 +24,7 @@ if ( isset($_POST['phone'], $_POST['text']) ) {
 
 	if ( !$error ) {
 
-		// собираем URL для отправки sms http://www.smspilot.ru/apikey.php
+		// собираем URL для отправки sms https://smspilot.ru/apikey.php
 		$api_url = 'http://smspilot.ru/api.php'
 			. '?send=' . urlencode($_POST['text'])
 			. '&to=' . urlencode($_POST['phone'])
@@ -56,7 +56,7 @@ if ( isset($_POST['phone'], $_POST['text']) ) {
 
 // проверка статуса
 if ( isset($_GET['check']) && ctype_digit( $_GET['check']) ) {
-	// собираем URL для проверки статуса sms http://www.smspilot.ru/apikey.php
+	// собираем URL для проверки статуса sms https://smspilot.ru/apikey.php
 	$api_url = 'http://smspilot.ru/api.php'
 		. '?check=' . $_GET['check']
 		. '&apikey=' . SMSPILOT_APIKEY

@@ -4,8 +4,8 @@ var querystring         = require('querystring');
 
 var phone = '79037672215'; // номер телефона
 var text = 'проверка'; // текст
-var from = ''; // имя отправителя из списка https://www.smspilot.ru/my-sender.php
-// !!! Замените API-ключ на свой https://www.smspilot.ru/my-settings.php#api
+var from = ''; // имя отправителя из списка https://smspilot.ru/my-sender.php
+// !!! Замените API-ключ на свой https://smspilot.ru/my-settings.php#api
 var apikey = 'XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ';
 var uri = [
 	'http://smspilot.ru/api.php',

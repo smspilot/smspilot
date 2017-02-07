@@ -1,8 +1,8 @@
 <?php // отправка SMS через шлюз SMSPILOT.RU на чистом PHP
 $phone = '79037672215'; // номер телефона в международном формате
 $text = 'проверка'; // текст сообщения
-$sender = 'INFORM'; //  имя отправителя из списка https://www.smspilot.ru/my-sender.php
-// !!! Замените API-ключ на свой https://www.smspilot.ru/my-settings.php#api
+$sender = 'INFORM'; //  имя отправителя из списка https://smspilot.ru/my-sender.php
+// !!! Замените API-ключ на свой https://smspilot.ru/my-settings.php#api
 $apikey = 'XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ';
 
 $url = 'http://smspilot.ru/api.php?send='.urlencode( $text ).'&to='.urlencode( $phone ).'&from='.$from.'&apikey='.$apikey.'&format=json';

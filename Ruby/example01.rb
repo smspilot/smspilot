@@ -4,7 +4,7 @@ uri = URI('http://smspilot.ru/api.php')
 params = {
 	:send => 'проверка', # текст сообщения
 	:to => '79087964781', # номер телефона в международном формате
-	# !!! Замените API-ключ на свой https://www.smspilot.ru/my-settings.php#api
+	# !!! Замените API-ключ на свой https://smspilot.ru/my-settings.php#api
 	:apikey => 'XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ',
 	:format => 'json'
 }

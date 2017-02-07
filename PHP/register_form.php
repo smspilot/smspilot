@@ -3,10 +3,10 @@
 if (!session_id())
 	session_start();
 
-// !!! Замените это значение на свой API-ключ из настроек https://www.smspilot.ru/my-settings.php#api
+// !!! Замените это значение на свой API-ключ из настроек https://smspilot.ru/my-settings.php#api
 $SMSPILOT_APIKEY = 'XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ';
 
-// Можно указать зарегистрированное имя отправителя https://www.smspilot.ru/my-sender.php
+// Можно указать зарегистрированное имя отправителя https://smspilot.ru/my-sender.php
 $SMSPILOT_FROM = '';
 
 if (isset($_POST['ajax']) && $_POST['ajax'] == 'sms_code') {

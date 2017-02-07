@@ -39,7 +39,7 @@ procedure TForm1.Button1Click(Sender: TObject);
 var s: string;
 begin
 
-s := 'http://www.smspilot.ru/api.php?';
+s := 'http://smspilot.ru/api.php?';
 s := s + 'send='    + IdHTTP1.URL.ParamsEncode(ed_send.Lines.Text);
 s := s + '&to='     + IdHTTP1.URL.ParamsEncode(ed_to.Text);
 s := s + '&from='   + IdHTTP1.URL.ParamsEncode(ed_from.Text);
