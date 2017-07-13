@@ -1,0 +1,137 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>SMSPILOT.RU</title>
+    <style>
+      body,th,td {
+        font-family: Tahoma, sans-serif;
+        font-size: 12px;
+      }
+      body { width: 700px; }
+	  a,a:visited { color: #2B587A; text-decoration: underline; }
+	  a:hover { color: #32529C; text-decoration: none; }
+      #divStatus {
+		clear:both;
+		font-weight: bold;
+		padding: 5px;
+		text-align:center;
+	}
+	#tblHistory {
+		border-collapse: collapse;
+	}
+	#tblHistory th, #tblHistory td {
+		border-left: solid 1px #D4D2CA;
+		border-top: solid 1px #D4D2CA;
+		border-bottom: solid 1px #D4D2CA;
+		padding: 3px;
+	}
+	table th { text-align:left; }
+	  .tabs {
+		  width: 100%;
+		  margin: 1em 0;
+		  zoom: 1;
+		  padding: 1px;
+		  position: relative;
+		  display: block;
+		  overflow: hidden;
+	  }
+	  .tabs dt {
+		  position:relative;
+		  float:left;
+		  line-height:2em;
+		  height:2em;
+		  border:1px solid #D6DAF8;
+		  border-bottom:0;
+		  padding:0 1em;
+		  margin: 0 1px 0 0;
+		  left:35px;
+		  cursor:pointer;
+		  background-color: #E3E7FB;
+		  -webkit-border-top-left-radius:2px;
+		  -webkit-border-top-right-radius:2px;
+		  -moz-border-radius-topleft:2px;
+		  -moz-border-radius-topright:2px;
+	  }
+	  .tabs dt:hover {
+		  background-color:#D6DAF8;
+	  }
+	  .tabs dt.selected {
+		  border-color: #D6DAF8;
+		  background:#fff;
+		  z-index:3;
+		  cursor:auto;
+	  }
+	  .tabs dd {
+		  background:#fff;
+		  display:none;
+		  float:right;
+		  width:100%;
+		  margin:2em 0 0 -100%;
+		  position:relative;
+		  z-index:2;
+
+	  }
+	  .tabs dd.selected {
+		  display:block;
+	  }
+	  .tabs .tab-content {
+		  border:1px solid #D6DAF8;
+		  padding:20px;
+		  min-height: 300px;
+		  -webkit-border-radius:2px;
+		  -moz-border-radius:2px;
+	  }
+
+
+	</style>
+
+    <script src="popup.js"></script>
+	<meta charset="utf-8">
+  </head>
+  <body>
+<!--	  <a href="#close" id="aClose" style="float:right; display:block; text-decoration: none; font-size: 150%">&times;</a> -->
+	<table><tr><td><img src="48x48.png" /></td><td><a style="font-size: 200%; color: #E1E1E1; text-decoration: none;" href="https://smspilot.ru/my.php" target="_blank">SMSPILOT.RU</a><br />Баланс <b id="sBalance"></b> (<a href="#updateBalance" id="aUpdateBalance">Обновить</a> | <a href="https://smspilot.ru/my-order.php" target="_blank">Пополнить</a>)</td></tr></table>
+	<div id="divStatus">&nbsp;</div>
+<dl class="tabs">
+	<dt id="dtSend">Отправить SMS</dt>
+	<dd id="ddSend"><div class="tab-content">
+		
+		<table cellpadding="5">
+		<tr><th nowrap><label for="phone">Номер телефона</label></th><td><input type="tel" size="20" id="phone" /></td></tr>
+		<tr><th nowrap valign="top"><label for="message">Текст SMS</label></th><td>
+		<input type="button" id="btnClearMessage" value="&times;" title="Очистить сообщение" /><input type="button" id="btnTest" value="Проверка" title="Проверка" /><input type="button" id="btnHLR" value="HLR" title="Скрытый запрос: обслуживается этот номер или уже нет" /><input type="button" id="btnPING" value="PING" title="Скрытый запрос: в сети сейчас этот телефон или выключен" />
+		<br/>		
+		<textarea id="message" cols="60" rows="5"></textarea></td></tr>
+		<tr><th nowrap><label for="sender">Отправитель</label></th><td><select id="sender"></select></td></tr>
+		<tr><th>&nbsp;</th><td><input id="btnSend" type="button" value="Отправить SMS" /></td></tr>
+		</table>
+	</div>
+	</dd>
+	<dt id="dtHistory">История</dt>
+	<dd id="ddHistory"><div class="tab-content">
+
+		<table id="tblHistory">
+			<tr><th width="1%">Дата</th><th width="1%">Телефон</th><th>Сообщение</th><th width="1%">Статус</th><th width="1%">Действия</th></tr>
+		</table>
+		<p><input type="button" id="btnUpdateStat" value="Обновить" />&nbsp;&nbsp;<a href="#" id="aClearHistory">Очистить историю</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://smspilot.ru/my-report.php?view=sms" target="_blank">Посмотреть отчеты на сайте smspilot.ru</a></p>
+	</div>
+	</dd>
+
+	<dt id="dtSettings">Настройка</dt>
+	<dd id="ddSettings"><div class="tab-content">
+		<table cellpadding="5">
+		<tr><th><label for="apikey">API-ключ</label><br/><a href="https://smspilot.ru/my-settings.php#api" target="_blank">Скопируйте отсюда</a></th><td><input type="text" size="64" maxlength="64" id="apikey" /></td>
+</tr>
+		<tr><th>&nbsp;</th><td><input type="button" id="btnSaveSettings" value="Сохранить" /></td></tr>
+		</table>
+	</div>
+	</dd>
+</dl>
+  </body>
+</html>
+
