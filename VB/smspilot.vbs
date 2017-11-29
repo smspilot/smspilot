@@ -4,7 +4,7 @@ Phone = "79087964781"
 ' Для поддержки кириллицы нужен очень длинный скрипт, поэтому используем транслит
 Text = "Otpravka SMS cherez SMSPILOT WSH VBS"
 
-' (!!!) Замените на свой API-ключ https://www.smspilot.ru/settings.php#api
+' (!!!) Замените на свой API-ключ https://www.smspilot.ru/my-settings.php#api
 APIKEY = "XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ"
 
 
