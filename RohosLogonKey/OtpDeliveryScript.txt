@@ -1,0 +1,162 @@
+﻿# (c) SafeJKA SRL, http://rohos.com
+#
+#  OTP delivery script
+# 
+#  To setup SMS delivery edit code where $NotifyBySms is used
+#  To setup Email delivery edit code where $NotifyByEmail is used
+#
+#  http://www.rohos.com/2017/08/how-to-setup-2fa-otp-delivery-by-email/
+#
+#  SMS:
+#  1) Skopiruite API-key SMSPILOT: https://smspilot.ru/my-settings.php
+#  2) Vstavte ego nizhe kak znachenie $SmsPilotApiKey
+
+# save status/error into registry for calling process.
+function SaveStatus($StatusText)
+{
+    $registryPath = "HKLM:\SOFTWARE\Wow6432Node\Rohos"
+    $regName = "PSStatus"
+    Set-ItemProperty -Path $registryPath -Name $regName -Value $StatusText
+    
+   # just output the error
+   #  Write-Host "Status: $($StatusText)" 
+
+}
+
+# send OTP by Email or SMS 
+#
+function SendNotification($AdUserName, $otp)
+{
+    # Failed notifications counter, will be returned to caller
+    $cntNotificationsNotSent = 0
+
+    if ($NotifyByEmail)
+    {
+        # Email Settings
+        $SmtpServer = "smtp.gmail.com"
+        $SmtpPort = 587
+        $SmtpLogin = "mail@gmail.com"
+        $SmtpPassword = "password"
+        $EmailFrom = "Mail@gmail.com"
+        $Subject = "New OTP Login"
+    
+        # Read user Phone or Email 
+
+        # If email is blank
+        if ($AdUserName.mail -eq $null)
+        {
+            Write-Host 
+	    SaveStatus -StatusText "Error .User $($AdUserName.sAMAccountName) - email is empty."
+            $cntNotificationsNotSent++
+        }
+        # If email is not blank - send message
+        else
+        {
+            $EmailTo = $AdUserName.mail
+            $EmailNotificationText = "Hello $($AdUserName.sAMAccountName), here is your new OTP Code $($otp)"
+
+            $SMTPMessage = New-Object System.Net.Mail.MailMessage($EmailFrom, $EmailTo, $Subject, $EmailNotificationText)
+            $SMTPClient = New-Object Net.Mail.SmtpClient($SmtpServer, $SmtpPort) 
+            $SMTPClient.EnableSsl = $true 
+            $SMTPClient.Credentials = New-Object System.Net.NetworkCredential($SmtpLogin, $SmtpPassword); 
+            try
+            {
+                $SMTPClient.Send($SMTPMessage)
+		SaveStatus -StatusText "Email OK to $($AdUserName.mail)"
+            }
+            catch
+            {
+		$ErrorMessage = "Email Exception Error: email: $($AdUserName.mail)" + $_.Exception.Message + " " + $_.Exception.ItemName    
+		SaveStatus -StatusText $ErrorMessage
+		return -1;
+            }
+        }
+    }
+
+    if ($NotifyBySms)
+    {
+        # If phone is blank
+        if ($AdUserName.telephoneNumber -eq $null)
+        {
+            SaveStatus -StatusText "Error $($AdUserName.sAMAccountName) - phone is empty."
+            $cntNotificationsNotSent++
+        } 
+        # If phone is not blank - send SMS
+        else
+        {
+
+        	# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        	#                 COPY APIKEY HERE https://smspilot.ru/my-settings.php
+        	# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        	$SmsPilotApiKey = "XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ"
+
+			$SmsNotificationText = "$($otp)"
+            $SmsGatewayUrl = "https://smspilot.ru/api.php?send=$($SmsNotificationText)&to=$($AdUserName.telephoneNumber)&apikey=$($SmsPilotApiKey)"
+
+            $RequestResult = Invoke-WebRequest -Uri $SmsGatewayUrl
+              
+            # if reply contains "SUCCESS" - then delivery was successfull
+            if ($RequestResult.Content -match "^SUCCESS")
+            {
+		SaveStatus -StatusText "SMS OK to $($AdUserName.telephoneNumber) RET: $($RequestResult.Content)."
+                #do nothing
+            }
+            else
+            {
+                SaveStatus -StatusText "SMS Error: $($RequestResult.Content)."
+                return -1
+            }
+        }
+    }
+
+    return $cntNotificationsNotSent
+}
+
+################################################################################
+################################################################################
+###                              MAIN CODE                                   ###
+################################################################################
+################################################################################
+
+try
+{
+    cls
+
+    if ($args.Length -eq 0)
+    {
+      
+      Write-Host "Command line paramenters: Username OTP not found."
+      SaveStatus -StatusText "Parameters are empty"
+      exit
+    }
+
+    $user = $args[0];
+    $otp = $args[1];
+  
+
+    # Set the variables
+
+    $NotifyByEmail = $true
+    $NotifyBySms = $false
+    
+   
+     $tmpUser = Get-ADUser $user -Properties telephoneNumber, mail
+
+
+     # If user found
+   
+     Write-Host "User $($tmpUser.sAMAccountName) found"
+     $NotificationResult = SendNotification -AdUserName $tmpUser -otp $otp
+          
+
+}
+catch
+{
+
+    # handle exception
+    $ErrorMessage = "Exception Error: " + $_.Exception.Message + " " + $_.Exception.ItemName
+
+    SaveStatus -StatusText $ErrorMessage
+}
+
