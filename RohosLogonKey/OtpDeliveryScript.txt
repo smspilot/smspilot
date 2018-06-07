@@ -137,8 +137,8 @@ try
 
     # Set the variables
 
-    $NotifyByEmail = $true
-    $NotifyBySms = $false
+    $NotifyByEmail = $false
+    $NotifyBySms = $true
     
    
      $tmpUser = Get-ADUser $user -Properties telephoneNumber, mail
