@@ -2,7 +2,7 @@
 // send_hlr.php
 // Асинхронно отправляем HLR-запрос оператору, чтобы выяснить обслуживается данный номер или уже нет
 
-$phone = '79999999999'; // замените на свой телефон
+$phone = '79999999999'; // замените на свой телефон, можно перечислить до 500 через запятую
 $callback  = 'http://example.com/hlr_callback.php'; // замените на свой скрипт для приёма статуса запроса
 $apikey = 'XXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZXXXXXXXXXXXXYYYYYYYYYYYYZZZZZZZZ'; // замените на свой API-ключ https://smspilot.ru/my-settings.php#api
 
