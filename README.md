@@ -12,3 +12,7 @@
 test - текст сообщения<br/>
 79037672215 - номер телефона<br/>
 XYZ - нужно заменить на API-ключ из настроек в личном кабинете https://smspilot.ru/my-settings.php#api
+
+
+## Альтернативный PHP-клиент SMSPILOT Олега Штанко
+https://github.com/xiaklizrum/smspilot-client
